@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { BasicFormComponent } from './components/basic-form/basic-form.component';
 
 import { NavComponent } from './components/nav/nav.component';
 
@@ -20,6 +21,10 @@ const routes: Routes = [
       {
         path: 'categories',
         loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule)
+      },
+      {
+        path: 'basic',
+        component: BasicFormComponent
       },
     ]
   }
