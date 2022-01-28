@@ -1,5 +1,5 @@
 <p>
-  {{ nameField.value }} <!-- es una instancia de un FormControl -->
+  Name: {{ nameField.value }} <!-- es una instancia de un FormControl -->
   <input type="text" [formControl]="nameField">
   <button (click)="getNameValue()">Get Name Value</button>
   <!-- <code>
@@ -8,3 +8,28 @@
     </pre>
   </code> -->
 </p>
+
+<p>
+  Email: {{ emailField.value }} <!-- es una instancia de un FormControl -->
+  <input type="email" [formControl]="emailField">
+</p>
+
+<p>
+ phone: {{ phoneField.value }} <!-- es una instancia de un FormControl -->
+  <input type="email" [formControl]="phoneField">
+</p>
+
+<p>
+  color: {{ colorField.value }} <!-- es una instancia de un FormControl -->
+   <input type="color" [formControl]="colorField">
+ </p>
+
+ <p>
+  date: {{ dateField.value }} <!-- es una instancia de un FormControl -->
+   <input type="date" [formControl]="">
+ </p>
+
+ <p>
+  age: {{ ageField.value }} <!-- es una instancia de un FormControl -->
+   <input type="number" [formControl]="ageField">
+ </p>

@@ -7,7 +7,12 @@ import { FormControl } from "@angular/forms";
 })
 export class BasicFormComponent implements OnInit {
 
-  nameField = new FormControl('soy un control');
+  nameField = new FormControl('');
+  emailField = new FormControl('');
+  phoneField = new FormControl('');
+  colorField = new FormControl('#000000');
+  dateField = new FormControl('#000000');
+  ageField = new FormControl(12);
 
   constructor() { }
 
@@ -22,6 +27,9 @@ export class BasicFormComponent implements OnInit {
 
   getNameValue(){
     console.log(this.nameField);
+  }
+  ngChange(){
+
   }
 
 }
