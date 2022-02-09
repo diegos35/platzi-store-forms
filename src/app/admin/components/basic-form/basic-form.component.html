@@ -1,3 +1,11 @@
+<div>
+  <mat-form-field>
+      <input matInput placeholder="Ingresa tu nombre aqui" [formControl]="nameField" required>
+      <mat-error *ngIf="nameField.hasError('required')">Este campo es requerido</mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="primary" [disabled]="nameField.invalid" (click)="getNameValue()">Get value</button>
+</div>
+<hr>
 <p>
   Name: {{ nameField.value }} {{nameField.valid}}
   <input type="text" [formControl]="nameField">
@@ -9,7 +17,7 @@
   </code> -->
 </p>
 <p>
-  <strong *ngIf="nameField.hasError('required') && nameField.touched"> Este campo es requerido</strong>
+  <strong *ngIf="nameField.hasError('required') && nameField.dirty"> Este campo es requerido</strong>
 </p>
 <p>
   <strong *ngIf="nameField.hasError('maxlength') && nameField.touched">Debe tener maximo 10 caracteres</strong>
