@@ -1,14 +1,19 @@
 <p>
-  Name: {{ nameField.value }} <!-- es una instancia de un FormControl -->
+  Name: {{ nameField.value }} {{nameField.valid}}
   <input type="text" [formControl]="nameField">
-  <button (click)="getNameValue()">Get Name Value</button>
+  <button [disabled]="nameField.invalid" (click)="getNameValue()">Get Name Value</button>
   <!-- <code>
     <pre>
       {{nameField | json}}
     </pre>
   </code> -->
 </p>
-
+<p>
+  <strong *ngIf="nameField.hasError('required') && nameField.touched"> Este campo es requerido</strong>
+</p>
+<p>
+  <strong *ngIf="nameField.hasError('maxlength') && nameField.touched">Debe tener maximo 10 caracteres</strong>
+</p>
 <p>
   Email: {{ emailField.value }} <!-- es una instancia de un FormControl -->
   <input type="email" [formControl]="emailField">
@@ -30,7 +35,7 @@
  </p>
 
  <p>
-  age: {{ ageField.value }} <!-- es una instancia de un FormControl -->
+  age: {{ ageField.value }}
    <input type="number" [formControl]="ageField">
  </p>
 
@@ -52,3 +57,42 @@
     <option value="tag-4">Tag 4</option>
    </select>
 </p>
+
+<p>
+  agree: {{ agreeField.value }}
+   <input type="checkbox" [formControl]="agreeField">
+ </p>
+
+
+<p>
+  gender: {{ genderField.value }} <!-- es una instancia de un FormControl -->
+  <label >
+    <input type="radio" value="male" [formControl]="genderField">
+    Male
+  </label>
+  <label >
+    <input type="radio" value="female" [formControl]="genderField">
+    Female
+  </label>
+  <label >
+    <input type="radio" value="other" [formControl]="genderField">
+    Other
+  </label>
+ </p>
+
+
+<p>
+  Zone: {{ zoneField.value }} <!-- es una instancia de un FormControl -->
+  <label >
+    <input name="zone" type="radio" value="zone-1" [formControl]="zoneField">
+    ZONE 1
+  </label>
+  <label >
+    <input name="zone" type="radio" value="zone-2" [formControl]="zoneField">
+    ZONE 2
+  </label>
+  <label >
+    <input name="zone" type="radio" value="zone-3" [formControl]="zoneField">
+    ZONE 3
+  </label>
+ </p>
