@@ -37,7 +37,11 @@ export class BasicFormComponent implements OnInit {
     console.log('nameField',this.nameField);
   }
 
-  ngChange(){
+  get isNameFieldValid(){ //para quitar las validaciones del html
+    return this.nameField.touched && this.nameField.valid
   }
 
+  get isNameFieldInvalid(){
+    return this.nameField.touched && this.nameField.invalid
+  }
 }
