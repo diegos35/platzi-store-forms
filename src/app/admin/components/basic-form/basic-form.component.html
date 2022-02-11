@@ -5,8 +5,8 @@
     <!-- Name: {{ form.get('value') }} {{ nameField.valid }} -->
     Name: {{ nameField.value  }} {{ nameField.valid }}
     <input
-    [class.is-valid]="isNameFieldValid"
-    [class.is-invalid]="isNameFieldInvalid"
+    [class.is-valid]="isNamedValid"
+    [class.is-invalid]="isNameInvalid"
     type="text"
     formControlName="name"/>
     <button [disabled]="nameField.invalid" (click)="getNameValue()">
@@ -115,7 +115,7 @@
   </p>
 
   <p>
-    <button type="submit" [disabled]="form.invalid">Enviar</button> <!-- este disable es lo puedo desabilitar desdr inspector -->
+    <button type="submit">Enviar</button> <!-- este disable es lo puedo desabilitar desdr inspector -->
   </p>
 </form>
 
