@@ -81,17 +81,17 @@ export class BasicFormComponent implements OnInit {
 
     //FormBuilder
     this.form = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.maxLength(10)]], //pasarselo como array
-      email:  [''],
-      phone:['',Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z ]+$/)]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', Validators.required],
       color: ['#000000'],
       date: [''],
-      age: [12],
+      age: [18, [Validators.required, Validators.min(18), Validators.max(100)]],
       category: [''],
       tag: [''],
-      agree: [false],
+      agree: [false, [Validators.requiredTrue]],
       gender: [''],
-      zone: ['']
+      zone: [''],
     });
 
   }
@@ -104,6 +104,15 @@ export class BasicFormComponent implements OnInit {
     return this.nameField.touched && this.nameField.invalid
   }
 
+  get isNameFieldValidForm() {
+    return this.form.controls.name.touched && this.form.controls.name.valid
+  }
+
+  get isNameFieldInvalidForm() {
+    return this.form.controls.name.touched && this.form.controls.name.invalid
+  }
+
+
   get isNamedValid() {
     return this.form.controls.name.touched && this.form.controls.name.valid
   }
@@ -114,8 +123,8 @@ export class BasicFormComponent implements OnInit {
 
 
   get getName() {
-    //return //this.form.get('name');
-    return this.form.controls.name.value
+    return this.form.get('name');
+    //return this.form.controls.name.value
   }
 
   get getEmail() {

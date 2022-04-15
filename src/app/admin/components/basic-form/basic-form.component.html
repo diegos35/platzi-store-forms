@@ -3,58 +3,89 @@
   <!--instancia form ts-->
   <p>
     <!-- Name: {{ form.get('value') }} {{ nameField.valid }} -->
-    Name: {{ nameField.value  }} {{ nameField.valid }}
+    Name: {{ getName.value }} {{ getName.invalid }}
     <input
-    [class.is-valid]="isNamedValid"
-    [class.is-invalid]="isNameInvalid"
-    type="text"
-    formControlName="name"/>
-    <button [disabled]="nameField.invalid" (click)="getNameValue()">
+      [class.is-valid]="isNamedValid"
+      [class.is-invalid]="isNameInvalid"
+      type="text"
+      formControlName="name"
+    />
+    <button [disabled]="getName.invalid" (click)="getNameValue()">
       Get value
     </button>
-
-    <!-- <code>
-    <pre>
-      {{nameField | json}}
-    </pre>
-  </code> -->
   </p>
-
-  <div class="messages" [class.active]="isNameFieldInvalid">
+  <!-- Mensaje de error para name -->
+  <div class="messages" [class.active]="isNameFieldInvalidForm">
     <p>
-      <strong *ngIf="nameField.touched && nameField.hasError('required')">Este campo es requerido</strong>
+      <strong *ngIf="getName.hasError('required')">Este campo es requerido</strong>
     </p>
 
     <p>
-      <strong *ngIf="nameField.touched && nameField.hasError('maxlength')">debe tener maximo 10 c</strong>
+      <strong *ngIf="getName.hasError('maxlength')">debe tener maximo 10 c</strong>
+    </p>
+
+    <p>
+      <strong *ngIf="getName.hasError('pattern')">No debe tener carac..</strong>
+    </p>
+  </div>
+  <!----------------- Email----------------------------->
+  <p>
+    Email: {{ getEmail.value }}
+    <input type="email" formControlName="email" />
+  </p>
+  <div class="messages" [class.active]="getEmail.touched && getEmail.invalid">
+    <p>
+      <strong *ngIf="getEmail.hasError('required') && getEmail.dirty">
+        Este campo es requerido</strong
+      >
+    </p>
+    <p>
+      <strong *ngIf="getEmail.hasError('email') && getEmail.dirty">
+        Este no es un email valido</strong
+      >
     </p>
   </div>
 
   <p>
-    Email: {{ emailField.value }}
-    <input type="email" formControlName="email"/>
+    Phone: {{ getPhone.value }}
+    <input type="tel" formControlName="phone" />
   </p>
-
+  <div class="messages" [class.active]="getPhone.touched && getPhone.invalid">
+    <p>
+      <strong *ngIf="getPhone.touched && getPhone.hasError('required')"
+        >Este campo es requerido</strong
+      >
+    </p>
+  </div>
 
   <p>
-    Phone: {{ phoneField.value }}
-    <input type="tel" formControlName="phone"/>
-  </p>
-
-  <p>
-    Color: {{ colorField.value }}
-    <input type="color" formControlName="color"/>
-  </p>
-
-  <p>
-    Date: {{ dateField.value }}
-    <input type="date" formControlName="date"/>
+    Color: {{ getColor.value }}
+    <input type="color" formControlName="color" />
   </p>
 
   <p>
-    Phone: {{ ageField.value }}
-    <input type="number" formControlName="age"/>
+    Date: {{ getDate.value }}
+    <input type="date" formControlName="date" />
   </p>
+
+  <p>
+    Age: {{ getAge.value }}
+    <input type="number" formControlName="age" />
+  </p>
+  <!------------------------Errors age------------------------------>
+  <div class="messages" [class.active]="getAge.touched && getAge.invalid">
+    <p>
+      <strong *ngIf="getAge.hasError('required')"
+        >Este campo es requerido</strong
+      >
+    </p>
+    <p>
+      <strong *ngIf="getAge.hasError('min')">Debe ser mayor de edad</strong>
+    </p>
+    <p>
+      <strong *ngIf="getAge.hasError('max')">Debe ser menor de 100 años</strong>
+    </p>
+  </div>
 
   <p>
     Category: {{ categoryField.value }}
@@ -78,22 +109,31 @@
 
   <p>
     Agree: {{ agreeField.value }}
-    <input type="checkbox" formControlName="agree"/>
+    <input type="checkbox" formControlName="agree" />
   </p>
-
 
   <p>
     Gender: {{ genderField.value }}
     <label>
-      <input name="gender" value="male" type="radio" formControlName="gender"/>
+      <input name="gender" value="male" type="radio" formControlName="gender" />
       Male
     </label>
     <label>
-      <input name="gender" value="female" type="radio" formControlName="gender"/>
+      <input
+        name="gender"
+        value="female"
+        type="radio"
+        formControlName="gender"
+      />
       Female
     </label>
     <label>
-      <input name="gender" value="other" type="radio" formControlName="gender"/>
+      <input
+        name="gender"
+        value="other"
+        type="radio"
+        formControlName="gender"
+      />
       Other
     </label>
   </p>
@@ -101,21 +141,22 @@
   <p>
     Zone: {{ zoneField.value }}
     <label>
-      <input name="zone" value="zone-1" type="radio" formControlName="zone"/>
+      <input name="zone" value="zone-1" type="radio" formControlName="zone" />
       Zona 1
     </label>
     <label>
-      <input name="zone" value="zone-2" type="radio" formControlName="zone"/>
+      <input name="zone" value="zone-2" type="radio" formControlName="zone" />
       Zona 2
     </label>
     <label>
-      <input name="zone" value="zone-3" type="radio" formControlName="zone"/>
+      <input name="zone" value="zone-3" type="radio" formControlName="zone" />
       Zona 3
     </label>
   </p>
 
   <p>
-    <button type="submit">Enviar</button> <!-- este disable es lo puedo desabilitar desdr inspector -->
+    <button type="submit">Enviar</button>
+    <!-- este disable es lo puedo desabilitar desdr inspector -->
   </p>
 </form>
 
@@ -181,7 +222,7 @@
   <p>
     phone: {{ phoneField.value }}
     <!-- es una instancia de un FormControl -->
-    <input type="email" [formControl]="phoneField" />
+    <input type="tel" [formControl]="phoneField" />
   </p>
 
   <p>
