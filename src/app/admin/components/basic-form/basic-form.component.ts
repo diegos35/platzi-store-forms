@@ -81,7 +81,10 @@ export class BasicFormComponent implements OnInit {
 
     //FormBuilder
     this.form = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z ]+$/)]],
+      fullName: this.formBuilder.group({
+        name: ['', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z ]+$/)]],
+        last: ['', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z ]+$/)]]
+      }),
       email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
       color: ['#000000'],
@@ -109,21 +112,30 @@ export class BasicFormComponent implements OnInit {
   }
 
   get isNameFieldInvalidForm() {
-    return this.form.controls.name.touched && this.form.controls.name.invalid
+    //return this.form.controls.name.touched && this.form.controls.name.invalid
+    return this.getName.touched && this.getName.invalid
   }
 
 
   get isNamedValid() {
-    return this.form.controls.name.touched && this.form.controls.name.valid
+    //return this.form.controls.name.touched && this.form.controls.name.valid
+    return this.getName.touched && this.getName.valid
   }
 
   get isNameInvalid() {
-    return this.form.controls.name.touched && this.form.controls.name.invalid
+    //return this.form.controls.name.touched && this.form.controls.name.invalid
+    return this.getName.touched && this.getName.valid
   }
 
 
   get getName() {
-    return this.form.get('name');
+    return this.form.get('fullName.name'); //return this.form.get('fullName')get('name');
+    //return this.form.controls.name.value
+  }
+
+  
+  get getLast() {
+    return this.form.get('fullName.last');
     //return this.form.controls.name.value
   }
 

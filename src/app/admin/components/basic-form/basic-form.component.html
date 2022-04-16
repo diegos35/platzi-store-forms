@@ -1,37 +1,47 @@
 <!-----------------------------------------------formulario--------------------- -->
 <form [formGroup]="form" (ngSubmit)="save($event)">
   <!--instancia form ts-->
-  <p>
-    <!-- Name: {{ form.get('value') }} {{ nameField.valid }} -->
-    Name: {{ getName.value }} {{ getName.invalid }}
-    <input
-      [class.is-valid]="isNamedValid"
-      [class.is-invalid]="isNameInvalid"
-      type="text"
-      formControlName="name"
-    />
-    <button [disabled]="getName.invalid" (click)="getNameValue()">
-      Get value
-    </button>
-  </p>
-  <!-- Mensaje de error para name -->
-  <div class="messages" [class.active]="isNameFieldInvalidForm">
+  <div formGroupName="fullName"> 
     <p>
-      <strong *ngIf="getName.hasError('required')"
-        >Este campo es requerido</strong
-      >
+      <!-- Name: {{ form.get('value') }} {{ nameField.valid }} -->
+      Name: {{ getName.value }} {{ getName.invalid }}
+      <input
+        [class.is-valid]="isNamedValid"
+        [class.is-invalid]="isNameInvalid"
+        type="text"
+        formControlName="name"
+      />
+      <button [disabled]="getName.invalid" (click)="getNameValue()">
+        Get value
+      </button>
     </p>
-
+    <!-- Mensaje de error para name -->
+    <div class="messages" [class.active]="isNameFieldInvalidForm">
+      <p>
+        <strong *ngIf="getName.hasError('required')"
+          >Este campo es requerido</strong
+        >
+      </p>
+  
+      <p>
+        <strong *ngIf="getName.hasError('maxlength')"
+          >debe tener maximo 10 c</strong
+        >
+      </p>
+  
+      <p>
+        <strong *ngIf="getName.hasError('pattern')">No debe tener carac..</strong>
+      </p>
+    </div>
     <p>
-      <strong *ngIf="getName.hasError('maxlength')"
-        >debe tener maximo 10 c</strong
-      >
-    </p>
-
-    <p>
-      <strong *ngIf="getName.hasError('pattern')">No debe tener carac..</strong>
-    </p>
+      <!-- Name: {{ form.get('value') }} {{ nameField.valid }} -->
+      Last: {{ getLast.value }} {{ getLast.invalid }}
+      <input
+        type="text"
+        formControlName="last"
+      />
   </div>
+  
   <!----------------- Email----------------------------->
   <p>
     Email: {{ getEmail.value }}
