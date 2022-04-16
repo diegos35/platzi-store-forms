@@ -17,11 +17,15 @@
   <!-- Mensaje de error para name -->
   <div class="messages" [class.active]="isNameFieldInvalidForm">
     <p>
-      <strong *ngIf="getName.hasError('required')">Este campo es requerido</strong>
+      <strong *ngIf="getName.hasError('required')"
+        >Este campo es requerido</strong
+      >
     </p>
 
     <p>
-      <strong *ngIf="getName.hasError('maxlength')">debe tener maximo 10 c</strong>
+      <strong *ngIf="getName.hasError('maxlength')"
+        >debe tener maximo 10 c</strong
+      >
     </p>
 
     <p>

@@ -1,5 +1,9 @@
 # PlatziStore
 
+Trabajando en componente de basic-form: ruta: admin/basic
+User: nicolas@nicolas.com
+Pass: nicolas.2010
+
 rama por defecto 1-init y master
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.11.
