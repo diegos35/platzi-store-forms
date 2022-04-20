@@ -1,1 +1,27 @@
-<p>categories works!</p>
+<a routerLink="create">Crear categoria</a>
+<div class="categories" *ngIf="data$ | async as dataArray">
+  <mat-card *ngFor="let data of dataArray" class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>
+        {{ data.name }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{ data.created_at | date }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="data.image" [alt]="data.name" />
+    <mat-card-content>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est,
+        voluptatem! Mollitia tempora, excepturi distinctio aliquid assumenda
+        eaque, delectus quae dolor deleniti deserunt consectetur magnam illo
+        voluptates cum nisi quas repudiandae!
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Like</button>
+      <button mat-stroked-button color="primary">SHARE</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
