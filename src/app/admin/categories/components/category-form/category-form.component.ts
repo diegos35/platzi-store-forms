@@ -7,6 +7,11 @@ import { Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
 
 import { finalize } from 'rxjs/operators';
+
+import { v4 as uuidv4 } from 'uuid';
+
+import { MyValidators } from 'src/app/utils/validators';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-category-form',
   templateUrl: './category-form.component.html',
@@ -15,6 +20,8 @@ import { finalize } from 'rxjs/operators';
 export class CategoryFormComponent implements OnInit {
 
   form: FormGroup;
+  image$: Observable<string>;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,7 +38,7 @@ export class CategoryFormComponent implements OnInit {
 
   private buildForm() {
     this.form = this.formBuilder.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.minLength(5)], MyValidators.validateCategory(this.categoriesService)],
       image: ['', Validators.required]
     });
   }
@@ -63,20 +70,21 @@ export class CategoryFormComponent implements OnInit {
 
   uploadFile(event){
     const image = event.target.files[0];
-    const name = 'category.png';
+    const name = `${uuidv4()}.png`;
+    console.log('name', name)
     const ref = this.storage.ref(name);
     const task = this.storage.upload(name, image);
 
     task.snapshotChanges()
     .pipe(
       finalize(()=>{
-        const urlImage$ = ref.getDownloadURL(); //urlImage$ Observable
-        urlImage$.subscribe(url => {
+        this.image$ = ref.getDownloadURL(); //urlImage$ Observable
+        this.image$.subscribe(url => {
           console.log(url);
           this.imageField.setValue(url);
         })
       })
     )
-      .subscribe();
+    .subscribe();
   }
 }
