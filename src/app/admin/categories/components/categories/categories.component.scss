@@ -1,4 +1,4 @@
-.example-card{
+/* .example-card{
     max-width: 400px;
 }
 
@@ -11,3 +11,15 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 40px;
 }
+ */
+:host{
+    width: 96%;
+    margin: 2%;
+    display: block;
+  }
+  table {
+    width: 100%;
+    img {
+      width: 150px;
+    }
+  }

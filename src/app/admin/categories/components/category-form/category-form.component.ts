@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {  Validators, FormBuilder, FormGroup} from '@angular/forms';
 import { CategoriesService } from '../../../../core/services/categories.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute,  Params} from '@angular/router';
 
 //fire Storage
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -21,19 +21,27 @@ export class CategoryFormComponent implements OnInit {
 
   form: FormGroup;
   image$: Observable<string>;
+  categoriaId: string;
 
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private categoriesService: CategoriesService,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private route: ActivatedRoute //read params route
     )
     { 
       this.buildForm();
     }
 
   ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      this.categoriaId = params.id;
+      if (this.categoriaId) {
+        this.getCategory();
+      }
+    })
   }
 
   private buildForm() {
@@ -65,6 +73,15 @@ export class CategoryFormComponent implements OnInit {
     .subscribe(res => {
       console.log(res);
       this.router.navigate(['./admin/categories']);
+    })
+  }
+
+  private getCategory(){
+    this.categoriesService.getCategory(this.categoriaId)
+    .subscribe(data => {
+      //this.nameField.setValue(data.name); //o campo por campo
+      this.form.patchValue(data); //tiene que tener las misma key del form
+      console.log(data);
     })
   }
 
