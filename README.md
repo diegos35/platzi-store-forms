@@ -1,5 +1,8 @@
 # PlatziStore
 
+Patron Smart vs Dumb Components: un patron para divir responsabilidades
+ejemplo: la carpeta components serian los Dumb components y smart en containers
+
 Trabajando en componente de basic-form: ruta: admin/basic
 User: nicolas@nicolas.com
 Pass: nicolas.2010
