@@ -60,8 +60,12 @@ export class CategoryFormComponent implements OnInit {
   }
 
   save(){
-    if (this.form.valid) {
-      this.CreateCategory();
+    if (this.form.controls.name.valid) {
+      if (this.categoriaId) {
+        this.updateCategory();   
+      }else{
+        this.CreateCategory();
+      }
     }else{
       this.form.markAllAsTouched
     }
@@ -70,6 +74,16 @@ export class CategoryFormComponent implements OnInit {
   private CreateCategory(){
     const data = this.form.value; 
     this.categoriesService.createCategory(data)
+    .subscribe(res => {
+      console.log(res);
+      this.router.navigate(['./admin/categories']);
+    })
+  }
+
+
+  private updateCategory(){
+    const data = this.form.value;
+    this.categoriesService.updateCategory(this.categoriaId, data)
     .subscribe(res => {
       console.log(res);
       this.router.navigate(['./admin/categories']);
@@ -87,7 +101,7 @@ export class CategoryFormComponent implements OnInit {
 
   uploadFile(event){
     const image = event.target.files[0];
-    const name = `${uuidv4()}.png`;
+    const name = `category.png`;
     console.log('name', name)
     const ref = this.storage.ref(name);
     const task = this.storage.upload(name, image);
