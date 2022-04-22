@@ -30,6 +30,7 @@ export class CategoryComponent implements OnInit {
   }
   
   CreateCategory(data){
+    console.log('entra')
     this.categoriesService.createCategory(data)
     .subscribe(res => {
       console.log(res);

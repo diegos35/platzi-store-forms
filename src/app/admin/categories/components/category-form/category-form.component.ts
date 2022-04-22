@@ -22,7 +22,17 @@ export class CategoryFormComponent implements OnInit {
 
   form: FormGroup;
   image$: Observable<string>;
-  @Input() category: Category; 
+  isNew= true; //flag
+
+  /*category: Category; */
+  @Input()  //es async,Input como seter
+  set category(data: Category){
+    if(data){
+      this.isNew = false;
+      this.form.patchValue(data);
+    }
+  }
+
   @Output() create =  new EventEmitter();
   @Output() update = new EventEmitter();
   categoriaId: string;
@@ -57,32 +67,31 @@ export class CategoryFormComponent implements OnInit {
   }
 
   save(){
-    if (this.form.controls.name.valid) {
-      if (this.category) {
-        this.update.emit(this.form.value);
-      }else{
+    if (this.form.controls.name.valid) { //momento exacto en que llega la infrmacion ya habra pasado por const, Oninit
+      if (this.isNew) {
         this.create.emit(this.form.value);
+      }else{
+        this.update.emit(this.form.value);
       }
     }else{
       this.form.markAllAsTouched
     }
   }
 
-  uploadFile(event){
+  uploadFile(event) {
     const image = event.target.files[0];
-    const name = `category.png`;
-    console.log('name', name)
+    const name = 'category.png';
     const ref = this.storage.ref(name);
     const task = this.storage.upload(name, image);
 
     task.snapshotChanges()
     .pipe(
-      finalize(()=>{
-        this.image$ = ref.getDownloadURL(); //urlImage$ Observable
+      finalize(() => {
+        this.image$ = ref.getDownloadURL();
         this.image$.subscribe(url => {
           console.log(url);
           this.imageField.setValue(url);
-        })
+        });
       })
     )
     .subscribe();

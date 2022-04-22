@@ -26,7 +26,7 @@
           <div class="row">
             <div class="col-xs">
               <img *ngIf="imageField.value" [src]="imageField.value">
-                <input (change)="uploadFile($event)" placeholder="Image" formControlName="image" type="file">
+                <input (change)="uploadFile($event)" placeholder="Image"  type="file">
                 <div class="messages" *ngIf="imageField.touched && imageField.invalid">
                   <mat-error *ngIf="imageField.hasError('required')">
                     Este campo es requerido
@@ -37,8 +37,8 @@
       </mat-card-content>
       <mat-card-actions>
         <button mat-raised-button type="submit">
-          <span *ngIf="!category">Crear Categoroía</span>
-          <span *ngIf="category">Editar</span>
+          <span *ngIf="isNew">Crear Categoroía</span>
+          <span *ngIf="!isNew">Editar</span>
         </button>
       </mat-card-actions>
     </mat-card>
