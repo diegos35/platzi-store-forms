@@ -50,9 +50,10 @@
            <!--  <mat-select  placeholder="categories" formControlName="category_id">
                 <mat-option   *ngFor="let category of categories"  [value]="category"></mat-option>
             </mat-select> -->
-            <mat-select placeholder="Select a Category" formControlName="category_id">
-              <mat-option *ngFor="let category of categories" [value]="category._id">{{ category.name }}</mat-option>
-            </mat-select>
+              <mat-label>Categories</mat-label>
+              <mat-select placeholder="Select a Category" formControlName="category_id">
+                <mat-option [value]="category._id" *ngFor="let category of categories">{{ category.name }}</mat-option>
+              </mat-select>
           </mat-form-field>
         </div>
       </div>
