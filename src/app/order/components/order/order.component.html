@@ -21,15 +21,49 @@
           </div>
         </div>
     </div>
-    
+
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Datos personales</ng-template>
-    <h1>contenifo</h1>
+    <form [formGroup]="form" (ngSubmit)="save()"> <!--importar en module ReactiveFormsModule-->
+      <mat-card>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-xs">
+              <mat-form-field>
+                <mat-label>Nombre</mat-label>
+                <input placeholder="Nombre" formControlName="name" matInput type="text">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs">
+              <button mat-raised-button color="primary" type="button" (click)="addAddressField()">Add address</button>
+             <div formArrayName="address" *ngFor="let address of addressField.controls; let i=index">
+              <div [formGroupName]="i">
+                  <!--Zip-->
+                <mat-form-field>
+                  <mat-label> ZipCode</mat-label>
+                  <input placeholder="zip" formControlName="zip" matInput type="text">
+                </mat-form-field>
+                <!-- Text -->
+                <mat-form-field>
+                  <mat-label>Text</mat-label>
+                  <input placeholder="Text" formControlName="text" matInput type="text">
+                </mat-form-field>
+              </div>
+             </div>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" type="submit">Next</button>
+        </mat-card-actions>
+      </mat-card>
+     </form>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Pago</ng-template>
     <h1>contenifo</h1>
   </mat-step>
 </mat-horizontal-stepper>
-
