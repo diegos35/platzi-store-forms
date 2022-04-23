@@ -1,5 +1,8 @@
 # PlatziStore
 
+API : https://developers.giphy.com/dashboard?
+
+
 Patron Smart vs Dumb Components: un patron para divir responsabilidades
 ejemplo: la carpeta components serian los Dumb components y smart en containers
 
