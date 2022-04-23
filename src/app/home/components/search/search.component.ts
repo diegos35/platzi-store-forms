@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { map  } from 'rxjs/Operators';
+//debounceTime darle un tiempo entre un cambio y otro
+import { map, debounceTime } from 'rxjs/Operators';
 
 @Component({
   selector: 'app-search',
@@ -20,6 +21,9 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchField.valueChanges
+    .pipe(
+      debounceTime(3000) //ms o 5000ms
+    )
     .subscribe( value => {
       this.getData(value);
     })
@@ -37,6 +41,7 @@ export class SearchComponent implements OnInit {
     )
     .subscribe((data) => {
       console.log(data);
+      this.results = data;
     })
   }
 

@@ -5,3 +5,8 @@
     Current: Value:
     {{searchField.value}}
 </p>
+<div class="images-grid" *ngFor="let result of results">
+    <div class="image">
+        <img [src]="result.url" alt="">
+    </div>
+</div>
