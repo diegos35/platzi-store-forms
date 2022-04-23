@@ -10,6 +10,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CartComponent } from './components/cart/cart.component';
 
 import { MaterialModule } from './../material/material.module';
+import { SteppperComponent } from './components/steppper/steppper.component';
 
 @NgModule({
   declarations: [
@@ -17,13 +18,15 @@ import { MaterialModule } from './../material/material.module';
     HighlightDirective,
     HeaderComponent,
     FooterComponent,
-    CartComponent
+    CartComponent,
+    SteppperComponent
   ],
   exports: [
     ExponentialPipe,
     HighlightDirective,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    SteppperComponent //Para asegurarnos que otros componentes lo utilicen
   ],
   imports: [
     CommonModule,

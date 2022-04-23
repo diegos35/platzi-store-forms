@@ -45,16 +45,8 @@
       </div>
       <div class="row">
         <div class="col-xs">
-          <mat-form-field>
-            <mat-label>Categories</mat-label>
-           <!--  <mat-select  placeholder="categories" formControlName="category_id">
-                <mat-option   *ngFor="let category of categories"  [value]="category"></mat-option>
-            </mat-select> -->
-              <mat-label>Categories</mat-label>
-              <mat-select placeholder="Select a Category" formControlName="category_id">
-                <mat-option [value]="category._id" *ngFor="let category of categories">{{ category.name }}</mat-option>
-              </mat-select>
-          </mat-form-field>
+         <app-steppper formControlName="stock">
+         </app-steppper>
         </div>
       </div>
     </mat-card-content>
@@ -62,5 +54,4 @@
       <button [disabled]="form.invalid" mat-raised-button type="submit">Guardar</button>
     </mat-card-actions>
   </mat-card>
-  
 </form>
